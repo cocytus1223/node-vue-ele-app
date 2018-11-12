@@ -9,11 +9,11 @@ const Profile = require("../../models/Profile");
 // @desc 返回请求的json数据
 // @access public
 
-// router.get("/test", (req, res) => {
-//   res.json({
-//     msg: "profile works"
-//   });
-// });
+router.get("/test", (req, res) => {
+  res.json({
+    msg: "profile works"
+  });
+});
 
 // $route POST api/profiles/add
 // @desc 创建信息接口

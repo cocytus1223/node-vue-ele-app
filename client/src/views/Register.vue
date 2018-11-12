@@ -17,7 +17,7 @@
             <el-input type="password"  v-model="registerUser.password2" placeholder="请确认密码"></el-input>
           </el-form-item>
           <el-form-item label="选择身份">
-            <el-select v-model="registerUser.indentity" placeholder="请选择身份">
+            <el-select v-model="registerUser.identity" placeholder="请选择身份">
               <el-option label="管理员" value="manager"></el-option>
               <el-option label="员工" value="employee"></el-option>
             </el-select>
@@ -50,7 +50,7 @@ export default {
         email: "",
         password: "",
         password2: "",
-        indentity: ""
+        identity: ""
       },
       rules: {
         name: [
@@ -111,9 +111,18 @@ export default {
     submitForm(formName) {
       this.$refs[formName].validate(valid => {
         if (valid) {
-          alert("submit!");
+          this.$axios.post("/api/users/register",this.registerUser)
+          .then(res => {
+            // 注册成功
+            this.$message({
+              message: "账号注册成功！",
+              type: "success"
+            })
+          })
+
+          this.$router.push('/login');
         } else {
-          console.log("error submit!!");
+          console.log('error submit!!');
           return false;
         }
       });
