@@ -59,36 +59,36 @@
 </script>
   
 <style scoped>
-  .menu_page {
-    position: fixed;
-    top: 71px;
-    left: 0;
-    min-height: 100%;
-    background-color: #324057;
-    z-index: 99;
-  }
-  .el-menu {
-    border: none;
-  }
-  .fa-margin {
-    margin-right: 5px;
-  }
-  .el-menu-vertical-demo:not(.el-menu--collapse) {
-    width: 180px;
-    min-height: 400px;
-  }
-  .el-menu-vertical-demo {
-    width: 35px;
-  }
-  .el-submenu .el-menu-item {
-    min-width: 180px;
-  }
+.menu_page {
+  position: fixed;
+  top: 71px;
+  left: 0;
+  min-height: 100%;
+  background-color: #324057;
+  z-index: 99;
+}
+.el-menu {
+  border: none;
+}
+.fa-margin {
+  margin-right: 5px;
+}
+.el-menu-vertical-demo:not(.el-menu--collapse) {
+  width: 180px;
+  min-height: 400px;
+}
+.el-menu-vertical-demo {
+  width: 35px;
+}
+.el-submenu .el-menu-item {
+  min-width: 180px;
+}
 
-  .hiddenDropdown,
-  .hiddenDropname {
-    display: none;
-  }
-  a {
-    text-decoration: none;
-  }
+.hiddenDropdown,
+.hiddenDropname {
+  display: none;
+}
+a {
+  text-decoration: none;
+}
 </style>
