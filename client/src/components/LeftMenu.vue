@@ -1,11 +1,7 @@
 <template>
-<el-row class="menu_page">
-  <el-col>
-    <el-menu
-      class="el-menu-vertical-demo"
-      background-color="#324057"
-      text-color="#fff"
-      active-text-color="#409eff">
+  <el-row class="menu_page">
+    <el-col>
+      <el-menu class="el-menu-vertical-demo" background-color="#324057" text-color="#fff" active-text-color="#409eff">
         <router-link to="/home">
           <el-menu-item index="0">
             <i class="fa fa-margin fa-server"></i>
@@ -25,9 +21,9 @@
             </el-submenu>
           </template>
         </router-link>
-    </el-menu>
-  </el-col>
-</el-row>
+      </el-menu>
+    </el-col>
+  </el-row>
 </template>
 
 <script>

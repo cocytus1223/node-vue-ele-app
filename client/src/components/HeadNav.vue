@@ -89,7 +89,7 @@ export default {
 .title {
   vertical-align: middle;
   font-size: 22px;
-  font-family: "Microsoft YaHei";
+  font-family: 'Microsoft YaHei';
   letter-spacing: 3px;
 }
 .user {
