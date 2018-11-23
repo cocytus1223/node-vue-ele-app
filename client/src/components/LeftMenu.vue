@@ -7,6 +7,7 @@
             <i class="fa fa-margin fa-server"></i>
             <span slot="title">首页</span>
           </el-menu-item>
+        </router-link>
           <template v-for="item in items">
             <el-submenu v-if="item.children" :index="item.path" :key="item.path">
               <template slot="title">
@@ -20,7 +21,6 @@
               </router-link>
             </el-submenu>
           </template>
-        </router-link>
       </el-menu>
     </el-col>
   </el-row>

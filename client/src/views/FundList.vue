@@ -22,7 +22,13 @@
           <el-button type="primary" size="small" icon="search" @click="handleSearch()">筛选</el-button>
         </el-form-item>
         <el-form-item class="btnRight">
-          <el-button type="primary" size="small" icon="view" @click="handleAdd()">添加</el-button>
+          <el-button
+            type="primary"
+            size="small"
+            icon="view"
+            @click="handleAdd()"
+            v-if="user.identity == 'manager'"
+          >添加</el-button>
         </el-form-item>
       </el-form>
     </div>
@@ -57,10 +63,25 @@
         </el-table-column>
         <el-table-column prop="remark" label="备注" align='center' width="220">
         </el-table-column>
-        <el-table-column label="操作" porp="operation" align="center" fixed="right" width="320">
+        <el-table-column
+          label="操作"
+          porp="operation"
+          align="center"
+          fixed="right"
+          width="320"
+          v-if="user.identity == 'manager'"
+        >
           <template slot-scope="scope">
-            <el-button size="small" type="warning" icon="edit" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
-            <el-button size="small" type="danger" icon="delete" @click="handleDelete(scope.$index, scope.row)">删除</el-button>
+            <el-button
+              size="small"
+              type="warning"
+              icon="edit"
+              @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
+            <el-button
+            size="small"
+            type="danger"
+            icon="delete"
+            @click="handleDelete(scope.$index, scope.row)">删除</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -119,6 +140,11 @@ import DialogFund from '../components/DialogFund'
           title: '',
           option: 'edit'
         }
+      }
+    },
+    computed: {
+      user() {
+        return this.$store.getters.user;
       }
     },
     created() {
