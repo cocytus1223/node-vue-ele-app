@@ -45,6 +45,22 @@
           </template>
         </el-table-column>
       </el-table>
+      <el-row>
+        <el-col :span="24">
+          <div class="pagination">
+            <el-pagination
+              @size-change="handleSizeChange"
+              @current-change="handleCurrentChange"
+              :current-page.sync="paginations.page_index"
+              :page-sizes="paginations.page_sizes"
+              :page-size="paginations.page_size"
+              :layout="paginations.layout"
+              :total="paginations.total"
+            >
+            </el-pagination>
+          </div>
+        </el-col>
+      </el-row>
     </div>
     <DialogFund :dialog="dialog" :formData="formData" @update="getProfile"></DialogFund>
   </div>
@@ -56,7 +72,15 @@ import DialogFund from '../components/DialogFund'
     name: "FundList",
     data () {
       return {
-        tableData: [],    
+        paginations: {
+          page_index: 1,
+          total: 0,
+          page_size: 5,
+          page_sizes: [5,10,15,20],
+          layout: "total,sizes,prev,pager,next,jumper"
+        },
+        tableData: [], 
+        allTableData: [],   
         formData: {
           type: "",
           describe: "",
@@ -82,7 +106,9 @@ import DialogFund from '../components/DialogFund'
         this.$axios.get("/api/profiles")
         .then(res => {
           // console.log(res);
-          this.tableData = res.data;
+          this.allTableData = res.data;
+          // 设置分页数据
+          this.setPaginations();
         })
         .catch(err => console.log(err))
       },
@@ -100,7 +126,7 @@ import DialogFund from '../components/DialogFund'
           expend: row.expend,
           cash: row.cash,
           remark: row.remark,
-          id:row._id
+          id: row._id
         }
       },
       handleDelete (index, row) {
@@ -126,7 +152,39 @@ import DialogFund from '../components/DialogFund'
           id: ""
         }
         this.dialog.show = true;
-      }
+      },
+      handleSizeChange(page_size) {
+        // 切换size
+        this.paginations.page_index = 1;
+        this.paginations.page_size = page_size;
+        this.tableData = this.allTableData.filter((item,index)=> {
+          return index < page_size;
+        });
+      },
+      handleCurrentChange(page) {
+        // 获取当前页
+        let index = this.paginations.page_size * (page - 1);
+        // 获取数据的总数
+        let nums = this.paginations.page_size * page;
+        // 容器
+        let tables = [];
+        for (let i = index; i < nums; i++) {
+          if (this.allTableData[i]) {
+            tables.push(this.allTableData[i]);
+          }
+          this.tableData = tables;
+        }
+      },
+      setPaginations() {
+        // 总页数
+        this.paginations.total = this.allTableData.length;
+        this.paginations.page_index = 1;
+        this.paginations.page_size = 5;
+        // 设置默认分页数据
+        this.tableData = this.allTableData.filter((item, index) => {
+          return index < this.paginations.page_size;
+        });
+      },
     },
     components: {
       DialogFund
@@ -143,5 +201,9 @@ import DialogFund from '../components/DialogFund'
 }
 .btnRight {
   float: right;
+}
+.pagination {
+  text-align: right;
+  margin-top: 10px;
 }
 </style>
